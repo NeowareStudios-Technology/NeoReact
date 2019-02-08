@@ -25,7 +25,7 @@ function Footer({ ...props }) {
     <footer className={footerClasses}>
       <div className={classes.container}>
         <div className={classes.right}>
-          CopyRight &copy; {1900 + new Date().getYear()}, by{" "}
+          Copyright &copy; {1900 + new Date().getYear()}, by{" "}
           <a
             href="https://www.neoware.io"
             className={aClasses}

@@ -6,71 +6,94 @@
 // jshint esversion: 6 
 
 import React from "react";
-import classNames from "classnames";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import { container } from "assets/jss/material-kit-react.jsx";
+import bkgImg from "assets/img/bg7.jpg";
 
 // core components
-import Header from "components/Header/Header.jsx";
+import NeoHdr from "components/Header/NeoHdr.jsx";
+// import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Footer from "components/Footer/Footer.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.jsx";
 
-import Parallax from "components/Parallax/Parallax.jsx";
+// Sections
+// import ZipSign from "./Sections/ZipSign";
+import LoginSection from "./Sections/LoginSection";
 
-// Sections for this page
-import ProductSection from "./Sections/ProductSection.jsx";
-import WorkSection from "./Sections/WorkSection.jsx";
-
-import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
-
-const dashboardRoutes = [];
+// ====================================
+//  MainPage
+// ====================================
 
 class MainPage extends React.Component {
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes } = this.props;
     return (
       <div>
-        <Header
+        <NeoHdr
+          absolute
           color="transparent"
-          routes={dashboardRoutes}
-          brand="Neo Packager"
-          // rightLinks={<HeaderLinks />}
-          fixed
-          changeColorOnScroll={{
-            height: 400,
-            color: "white"
-          }}
-          {...rest}
         />
-        <Parallax filter image={require("assets/img/landing-bg.jpg")}>
-          <div className={classes.container}>
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={6}>
-                <Button
-                  color="danger"
-                  size="lg"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fas fa-play" />Watch video
-                </Button>
-              </GridItem>
-            </GridContainer>
-          </div>
-        </Parallax>
-        <div className={classNames(classes.main, classes.mainRaised)}>
-          <div className={classes.container}>
-            <WorkSection />
-          </div>
+        <div
+          className={classes.pageHeader}
+          style={{
+            backgroundImage: "url(" + bkgImg + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "top center"
+          }}
+        >
+          {/* <ZipSign /> */}
+          <LoginSection /> 
+          <Footer whiteFont />
         </div>
-        <Footer />
       </div>
     );
   }
 }
 
-export default withStyles(landingPageStyle)(MainPage);
+// ====================================
+//  MainPage
+// ====================================
+
+const Styles = theme => ({
+  container: {
+    ...container,
+    zIndex: "2",
+    position: "relative",
+    paddingTop: "20vh",
+    color: "#FFFFFF"
+  },
+  pageHeader: {
+    minHeight: "100vh",
+    height: "auto",
+    display: "inherit",
+    position: "relative",
+    margin: "0",
+    padding: "0",
+    border: "0",
+    alignItems: "center",
+    "&:before": {
+      background: "rgba(0, 0, 0, 0.5)"
+    },
+    "&:before,&:after": {
+      position: "absolute",
+      zIndex: "1",
+      width: "100%",
+      height: "100%",
+      display: "block",
+      left: "0",
+      top: "0",
+      content: '""'
+    },
+    "& footer li a,& footer li a:hover,& footer li a:active": {
+      color: "#FFFFFF"
+    },
+    "& footer": {
+      position: "absolute",
+      bottom: "0",
+      width: "100%",
+    }
+  },
+});
+
+export default withStyles(Styles)(MainPage);
